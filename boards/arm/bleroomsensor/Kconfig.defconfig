@@ -9,5 +9,7 @@ config BOARD
 config BT_CTLR
    default BT
 
+config SPI
+  default y
 
 endif

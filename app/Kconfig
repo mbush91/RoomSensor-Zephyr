@@ -1,0 +1,25 @@
+
+menu "Zephyr Kernel"
+  source "Kconfig.zephyr"
+
+config BT_TX_RATE
+  int "Frequency to TX advs in ms"
+
+config SS_SOIL_RES
+  int "Resistance of high side resistor in Ohms"
+  help
+    Resistance of high side resistor in Ohms
+
+config SS_BATT_MAX_MV
+  int "Max battery voltage in mV"
+
+config SS_BATT_MIN_MV
+  int "Min battery voltage in mV"
+
+config SS_BATT_R1
+  int "High side resistor value in ohms"
+
+config SS_BATT_R2
+  int "Low side resistor value in ohms"
+
+endmenu
