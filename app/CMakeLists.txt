@@ -11,4 +11,6 @@ target_include_directories(app PRIVATE
 target_sources(app PRIVATE
   src/main.c
   src/ss_bt.c
+  src/bt_coded.c
+  src/bme280.c
 )
