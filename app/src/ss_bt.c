@@ -8,7 +8,7 @@ LOG_MODULE_REGISTER(ss_bt, LOG_LEVEL_INF);
 
 // advertising params
 #define MANUFACTURER_ID 0x0877
-#define SUBTYPE 0x55
+#define SUBTYPE 0x7E
 
 #define MANUFACTURER_ID_LSB ((MANUFACTURER_ID >> 0) & 0xFF)
 #define MANUFACTURER_ID_MSB ((MANUFACTURER_ID >> 8) & 0xFF)
