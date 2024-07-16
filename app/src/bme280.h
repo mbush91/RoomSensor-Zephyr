@@ -1,3 +1,6 @@
+#ifndef BME280_SENSOR
+#define BME280_SENSOR
+
 #include <zephyr/drivers/sensor.h>
 #include <stdint.h>
 
@@ -16,3 +19,5 @@ void bme280_read(
   struct bme280_sensor_vals* press,
   struct bme280_sensor_vals* humidity
 );
+
+#endif // BME280_SENSOR

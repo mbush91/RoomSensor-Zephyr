@@ -2,9 +2,10 @@
 #define SS_BT
 
 #include <stdint.h>
+#include "bme280.h"
 
 #define MANUFACTURER_ID 0x0877
-#define SUBTYPE 0x55
+#define SUBTYPE 0x7E
 
 #define MANUFACTURER_ID_LSB ((MANUFACTURER_ID >> 0) & 0xFF)
 #define MANUFACTURER_ID_MSB ((MANUFACTURER_ID >> 8) & 0xFF)
@@ -14,7 +15,10 @@
 #define TX_RATE ((CONFIG_BT_TX_RATE * 16) / 10)
 
 void init_ss_bt(void);
-void ss_bt_update(int32_t impediance, int8_t batt);
-void en_coded_adv(void);
+void ss_bt_update(
+  struct bme280_sensor_vals temp,
+  struct bme280_sensor_vals press,
+  struct bme280_sensor_vals humidity,
+  int8_t batt);
 
 #endif
