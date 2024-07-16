@@ -30,20 +30,19 @@ void bme280_init(void) {
   get_bme280_device();
 }
 
-void bme280_read(void) {
+void bme280_read(struct sensor_value* temp, struct sensor_value* press, struct sensor_value* humidity) {
   int err;
-  struct sensor_value temp, press, humidity;
 
   if(dev != NULL) {
     err = sensor_sample_fetch(dev);
     if(!err) {
-      sensor_channel_get(dev, SENSOR_CHAN_AMBIENT_TEMP, &temp);
-      sensor_channel_get(dev, SENSOR_CHAN_PRESS, &press);
-      sensor_channel_get(dev, SENSOR_CHAN_HUMIDITY, &humidity);
+      sensor_channel_get(dev, SENSOR_CHAN_AMBIENT_TEMP, temp);
+      sensor_channel_get(dev, SENSOR_CHAN_PRESS, press);
+      sensor_channel_get(dev, SENSOR_CHAN_HUMIDITY, humidity);
 
       LOG_INF("temp: %d.%06d; press: %d.%06d; humidity: %d.%06d\n",
-          temp.val1, temp.val2, press.val1, press.val2,
-          humidity.val1, humidity.val2);
+          temp->val1, temp->val2, press->val1, press->val2,
+          humidity->val1, humidity->val2);
     } else {
       LOG_ERR("Boo");
     }

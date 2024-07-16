@@ -6,17 +6,19 @@
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
+struct sensor_value temp, press, humidity;
+
 int main(void)
 {
   int res = 1000;
-  //en_coded_adv();
+  init_ss_bt();
   bme280_init();
 
   while (1)
   {
     k_msleep(1000);
-    bme280_read();
-    //ss_bt_update(res,98);
+    bme280_read(&temp,&press,&humidity);
+
     res++;
     LOG_INF("main");
   }
