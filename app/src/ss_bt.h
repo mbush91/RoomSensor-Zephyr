@@ -19,6 +19,6 @@ void ss_bt_update(
   struct bme280_sensor_vals temp,
   struct bme280_sensor_vals press,
   struct bme280_sensor_vals humidity,
-  int8_t batt);
+  int16_t batt);
 
 #endif

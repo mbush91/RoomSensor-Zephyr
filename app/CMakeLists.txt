@@ -13,4 +13,5 @@ target_sources(app PRIVATE
   src/ss_bt.c
   src/bt_coded.c
   src/bme280.c
+  src/batt.c
 )

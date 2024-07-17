@@ -15,7 +15,8 @@ static uint8_t data_buffer[] = {
     MANUFACTURER_ID_LSB, // MANUFACTURER ID (lsb)
     MANUFACTURER_ID_MSB, // MANUFACTURER ID (msb)
     SUBTYPE,             // SUBTYPE
-    0x00,                // BATT %
+    0x00,                // BATT_MV 1
+    0x00,                // BATT_MV 2
     0x00,                // T1
     0x00,                // T2
     0x00,                // P1
@@ -32,15 +33,15 @@ void ss_bt_update(
   struct bme280_sensor_vals temp,
   struct bme280_sensor_vals press,
   struct bme280_sensor_vals humidity,
-  int8_t batt)
+  int16_t batt)
 {
-  data_buffer[3] = (uint8_t)batt;
-  data_buffer[4] = (uint8_t)temp.val1;
-  data_buffer[5] = (uint8_t)temp.val2;
-  data_buffer[6] = (uint8_t)press.val1;
-  data_buffer[7] = (uint8_t)press.val2;
-  data_buffer[8] = (uint8_t)humidity.val1;
-  data_buffer[9] = (uint8_t)humidity.val2;
+  memcpy(&data_buffer[3],&batt,sizeof(batt));
+  data_buffer[5] = (uint8_t)temp.val1;
+  data_buffer[6] = (uint8_t)temp.val2;
+  data_buffer[7] = (uint8_t)press.val1;
+  data_buffer[8] = (uint8_t)press.val2;
+  data_buffer[9] = (uint8_t)humidity.val1;
+  data_buffer[10] = (uint8_t)humidity.val2;
 
 
   bt_le_adv_update_data(ad_mnft_data_buffer,
