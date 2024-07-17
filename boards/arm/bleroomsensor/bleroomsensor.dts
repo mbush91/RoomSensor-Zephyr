@@ -87,3 +87,11 @@
     reg = <0x76>;
   };
 };
+
+&temp {
+  status = "disabled";
+};
+
+&wdt {
+  status = "disabled";
+};
