@@ -8,6 +8,8 @@ LOG_MODULE_REGISTER(ss_bt, LOG_LEVEL_INF);
 
 #define MAX_INTERVAL 0x4000
 
+int32_t bt_ready = 0;
+
 static struct bt_le_adv_param *adv_param = BT_LE_ADV_PARAM(BT_LE_ADV_OPT_USE_IDENTITY,
                                                            MAX_INTERVAL - 5,
                                                            MAX_INTERVAL,
@@ -45,20 +47,27 @@ void ss_bt_update(
   data_buffer[9] = (uint8_t)humidity.val1;
   data_buffer[10] = (uint8_t)humidity.val2;
 
+  while(bt_ready == 0) {
+    k_msleep(100);
+    LOG_INF("Waiting for BT to start");
+  }
 
-  bt_le_adv_update_data(ad_mnft_data_buffer,
-                        ARRAY_SIZE(ad_mnft_data_buffer),
-                        sd,
-                        ARRAY_SIZE(sd));
-}
-
-void bt_ready_cb(int err)
-{
-  err = bt_le_adv_start(adv_param,
+  int err = bt_le_adv_start(adv_param,
                         ad_mnft_data_buffer,
                         ARRAY_SIZE(ad_mnft_data_buffer),
                         sd,
                         ARRAY_SIZE(sd));
+  if (err) {
+    LOG_ERR("BLE start err %d", err);
+  }
+
+
+}
+
+void bt_ready_cb(int err)
+{
+
+  bt_ready = 1;
 
   if (err)
   {
@@ -75,7 +84,7 @@ void init_ss_bt(void)
 }
 
 void disable_bt(void) {
-  int err = bt_disable();
+  int err = bt_le_adv_stop();
 
   if(err) {
     LOG_ERR("Couldn't disable BT, err %d", err);
