@@ -11,6 +11,7 @@
     "log.h": "c",
     "types.h": "c",
     "sensor.h": "c",
-    "adc.h": "c"
+    "adc.h": "c",
+    "batt.h": "c"
   }
 }

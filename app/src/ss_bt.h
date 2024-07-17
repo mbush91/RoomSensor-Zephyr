@@ -15,6 +15,7 @@
 #define TX_RATE ((CONFIG_BT_TX_RATE * 16) / 10)
 
 void init_ss_bt(void);
+void disable_bt(void);
 void ss_bt_update(
   struct bme280_sensor_vals temp,
   struct bme280_sensor_vals press,

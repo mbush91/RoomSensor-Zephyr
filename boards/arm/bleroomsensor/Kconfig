@@ -2,4 +2,4 @@ config BOARD_ENABLE_DCDC
 	bool "DCDC mode"
 	select SOC_DCDC_NRF52X
 	default y
-	depends on BOARD_SOILSENSOR_V1_0_0
+	depends on CONFIG_BOARD_BLEROOMSENSOR

@@ -69,4 +69,13 @@ void init_ss_bt(void)
   int32_t err;
 
   err = bt_enable(bt_ready_cb);
+
+}
+
+void disable_bt(void) {
+  int err = bt_disable();
+
+  if(err) {
+    LOG_ERR("Couldn't disable BT, err %d", err);
+  }
 }

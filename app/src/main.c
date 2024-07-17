@@ -1,6 +1,7 @@
 #include "ss_bt.h"
 #include "bme280.h"
 #include "batt.h"
+#include "pwr.h"
 
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
@@ -10,25 +11,26 @@ LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
 
 
 struct bme280_sensor_vals temp, press, humidity;
+int16_t batt_mv;
 
 int main(void)
 {
-  int res = 1000;
-  int16_t batt_mv;
   batt_init();
   bme280_init();
-  init_ss_bt();
 
   while (1)
   {
-    k_msleep(1000);
-
+    pwr_wake_bus();
     bme280_read(&temp,&press,&humidity);
     batt_mv = batt_read();
-    LOG_INF("Batt %d",batt_mv);
-
+    init_ss_bt();
     ss_bt_update(temp,press,humidity,batt_mv);
 
-    res++;
+    k_msleep(CONFIG_BT_TX_TIME);
+
+    pwr_sleep_bus();
+
+    k_sleep(K_SECONDS(CONFIG_TIME_BETWEEN_MEASURMENTS));
+
   }
 }

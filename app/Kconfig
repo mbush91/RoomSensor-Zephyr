@@ -5,21 +5,10 @@ menu "Zephyr Kernel"
 config BT_TX_RATE
   int "Frequency to TX advs in ms"
 
-config SS_SOIL_RES
-  int "Resistance of high side resistor in Ohms"
-  help
-    Resistance of high side resistor in Ohms
+config TIME_BETWEEN_MEASURMENTS
+  int "How long to sleep between broadcasts (seconds)"
 
-config SS_BATT_MAX_MV
-  int "Max battery voltage in mV"
-
-config SS_BATT_MIN_MV
-  int "Min battery voltage in mV"
-
-config SS_BATT_R1
-  int "High side resistor value in ohms"
-
-config SS_BATT_R2
-  int "Low side resistor value in ohms"
+config BT_TX_TIME
+  int "How long to TX once we wake up (ms)"
 
 endmenu

@@ -21,6 +21,11 @@
   };
 };
 
+&uicr {
+  gpio-as-nreset;
+};
+
+
 &adc {
 	status = "okay";
   #address-cells = <1>;
@@ -70,20 +75,6 @@
 		};
 	};
 };
-
-// &spi0 {
-//   bme280@0 {
-//     compatible = "bosch,bme280";
-//     reg = <0x0>;
-//     spi-max-frequency = <1000000>;
-//   };
-
-//   status = "okay";
-//   cs-gpios = <&gpio0 26 0>;
-//   pinctrl-0 = <&spi0_default_bme280>;
-// 	pinctrl-1 = <&spi0_sleep_bme280>;
-// 	pinctrl-names = "default", "sleep";
-// };
 
 &i2c0 {
   status="okay";
