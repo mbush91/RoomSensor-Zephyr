@@ -6,13 +6,13 @@
 
 LOG_MODULE_REGISTER(ss_bt, LOG_LEVEL_INF);
 
-#define MAX_INTERVAL 0x4000
+#define BT_MAX_INTERVAL 0x4000
 
 int32_t bt_ready = 0;
 
 static struct bt_le_adv_param *adv_param = BT_LE_ADV_PARAM(BT_LE_ADV_OPT_USE_IDENTITY,
-                                                           MAX_INTERVAL - 5,
-                                                           MAX_INTERVAL,
+                                                           TX_RATE - 5,
+                                                           TX_RATE,
                                                            NULL);
 
 static uint8_t data_buffer[] = {
